@@ -6,7 +6,7 @@ import {
   PerspectiveIcon,
   RotateLeft,
   RotateRight,
-} from "../src/romaine_components.development";
+} from "../src/components";
 interface RomaineExampleProps {
   setBlob?: React.Dispatch<React.SetStateAction<Blob | null>>;
   image: string | null;
