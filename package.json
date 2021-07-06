@@ -12,7 +12,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "check-types": "tsc",
     "pretest": "eslint --ignore-path .gitignore ./src",
-    "rebuild": "rm -r ./dist; npm run build; cd ..; npm uninstall romaine; npm install ./romaine; cd ./romaine"
+    "rebuild": "rm -r ./dist; npm run build; cd ..; npm uninstall romaine; npm install ./romaine; cd ./romaine",
+    "find-todo": "grep -r '@todo' ./src"
   },
   "repository": {
     "type": "git",
@@ -41,6 +42,6 @@
   },
   "peerDependencies": {
     "react": ">= 16.8.0 < 18.0.0",
-    "romaine": "^0.3.0"
+    "romaine": ">= 0.4.1"
   }
 }
