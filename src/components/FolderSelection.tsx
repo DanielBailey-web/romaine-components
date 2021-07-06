@@ -7,7 +7,7 @@ interface Props
   > {
   handleDrop?: (
     File: FileList | null,
-    ev: React.DragEvent<HTMLLabelElement>
+    ev: React.DragEvent<HTMLDivElement>
   ) => void;
   getFiles?: (File: FileList | string | null) => void;
   children?: React.ReactNode;
@@ -32,6 +32,12 @@ export const FolderSelection = ({
     height: "100%",
     outline: "thin solid black",
   };
+  const initialDivStyles: React.CSSProperties = {
+    position: "absolute",
+    inset: 0,
+    zIndex: 2000,
+    backgroundColor: "white",
+  };
   const hoverInputStyles: React.CSSProperties = {
     position: "absolute",
     top: 0,
@@ -50,6 +56,12 @@ export const FolderSelection = ({
     outline: "thin solid black",
     backgroundColor: "lightblue",
   };
+  const hoverDivStyles: React.CSSProperties = {
+    position: "absolute",
+    inset: 0,
+    backgroundColor: "white",
+    zIndex: 2000,
+  };
   const finalInputStyles: React.CSSProperties = {
     position: "absolute",
     top: 0,
@@ -66,12 +78,20 @@ export const FolderSelection = ({
     width: "100%",
     height: "100%",
     outline: "thin solid black",
-    backgroundColor: "lightblue",
+  };
+  const finalDivStyles: React.CSSProperties = {
+    display: "flex",
+    position: "absolute",
+    right: 0,
+    bottom: 0,
+    zIndex: 300,
+    width: "240px",
   };
 
   const initialState = {
     inputStyles: initialInputStyles,
     labelStyles: initialLabelStyles,
+    divStyles: initialDivStyles,
   };
 
   type Reducer<S, A> = (prevState: S, action: A) => S;
@@ -83,11 +103,20 @@ export const FolderSelection = ({
       return {
         inputStyles: initialInputStyles,
         labelStyles: initialLabelStyles,
+        divStyles: initialDivStyles,
       };
     if (action === "hover")
-      return { inputStyles: hoverInputStyles, labelStyles: hoverLabelStyles };
+      return {
+        inputStyles: hoverInputStyles,
+        labelStyles: hoverLabelStyles,
+        divStyles: hoverDivStyles,
+      };
     if (action === "final")
-      return { inputStyles: finalInputStyles, labelStyles: finalLabelStyles };
+      return {
+        inputStyles: finalInputStyles,
+        labelStyles: finalLabelStyles,
+        divStyles: finalDivStyles,
+      };
 
     return { ...state };
   };
@@ -95,18 +124,19 @@ export const FolderSelection = ({
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
+    if (image) dispatch("final");
     const preventDefault = (event: DragEvent) => {
       event.preventDefault();
     };
     const preventDefaultDrop = (event: DragEvent) => {
-      dispatch("initial");
+      dispatch("final");
       event.preventDefault();
     };
     const dragEnter = () => {
       dispatch("hover");
     };
     const dragExit = () => {
-      dispatch("initial");
+      dispatch(Boolean(image) ? "final" : "initial");
     };
 
     window.addEventListener("dragover", preventDefault);
@@ -121,7 +151,7 @@ export const FolderSelection = ({
     };
   }, []);
   //https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API/File_drag_and_drop
-  function dropHandler(ev: React.DragEvent<HTMLLabelElement>) {
+  function dropHandler(ev: React.DragEvent<HTMLDivElement>) {
     ev.preventDefault();
     const files = ev.dataTransfer ? ev.dataTransfer.files : null;
     handleDrop && handleDrop(files, ev);
@@ -132,19 +162,11 @@ export const FolderSelection = ({
     useState<React.InputHTMLAttributes<HTMLInputElement>["value"]>();
 
   return (
-    <div
-      style={{
-        position: "absolute",
-        inset: 0,
-        zIndex: image ? 0 : 100,
-        backgroundColor: "white",
-      }}
-    >
+    <div onDrop={dropHandler} style={state.divStyles}>
       <label
         id="drop_zone"
         htmlFor="romaine-folder-input"
         style={state.labelStyles}
-        onDrop={dropHandler}
       >
         <input
           type="file"
