@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { IconWrapper } from ".";
 import { useRomaine } from "romaine";
 interface Props
@@ -8,15 +8,27 @@ interface Props
   > {}
 
 export const CropperIcon = (props: Props) => {
-  const {
-    romaine: { mode },
-    setMode,
-  } = useRomaine();
+  const { setMode } = useRomaine();
+  useEffect(() => {
+    // using keydown because it already requires another key to be pressed
+    const eventListenerCropper = (e: KeyboardEvent) => {
+      if (!e.ctrlKey && e.shiftKey && e.key === "C") {
+        e.preventDefault();
+        setMode && setMode("crop");
+      }
+    };
+    window.removeEventListener("keydown", eventListenerCropper);
+    window.addEventListener("keydown", eventListenerCropper);
+    return () => {
+      window.removeEventListener("keydown", eventListenerCropper);
+    };
+  }, []);
   return (
     <IconWrapper
       {...props}
       onClick={() => setMode && setMode("crop")}
-      selected={mode === "crop"}
+      selected="crop"
+      tooltip="Crop Tool (shift+C)"
     >
       <svg
         stroke="currentColor"

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { IconWrapper } from ".";
 import { useRomaine } from "romaine";
 
@@ -9,15 +9,27 @@ interface Props
   > {}
 
 export const PerspectiveIcon = (props: Props) => {
-  const {
-    romaine: { mode },
-    setMode,
-  } = useRomaine();
+  const { setMode } = useRomaine();
+  useEffect(() => {
+    // using keydown because it already requires another key to be pressed
+    const eventListenerPerspective = (e: KeyboardEvent) => {
+      if (e.ctrlKey && e.shiftKey && e.key === "C") {
+        e.preventDefault();
+        setMode && setMode("perspective-crop");
+      }
+    };
+    window.removeEventListener("keydown", eventListenerPerspective);
+    window.addEventListener("keydown", eventListenerPerspective);
+    return () => {
+      window.removeEventListener("keydown", eventListenerPerspective);
+    };
+  }, []);
   return (
     <IconWrapper
       {...props}
       onClick={() => setMode && setMode("perspective-crop")}
-      selected={mode === "perspective-crop"}
+      selected="perspective-crop"
+      tooltip={"Perspective Cropper (Ctrl + Shift + C)"}
     >
       <svg
         stroke="currentColor"
