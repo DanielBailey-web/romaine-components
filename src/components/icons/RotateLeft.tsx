@@ -1,5 +1,5 @@
 import React from "react";
-import { IconWrapper } from ".";
+import { IconWrapper } from "./IconWrapper";
 import { useRomaine } from "romaine";
 
 interface Props
