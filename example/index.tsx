@@ -8,7 +8,7 @@ import {
   RotateRight,
 } from "../src/components";
 interface RomaineExampleProps {
-  setBlob?: React.Dispatch<React.SetStateAction<Blob | null>>;
+  setBlob?: (blob: Blob | null) => void;
   image: string | null;
 }
 export const RomaineExample = ({
