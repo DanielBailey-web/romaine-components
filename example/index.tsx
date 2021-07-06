@@ -9,11 +9,15 @@ import {
 } from "../src/romaine_components.development";
 interface RomaineExampleProps {
   setBlob?: React.Dispatch<React.SetStateAction<Blob | null>>;
+  image: string | null;
 }
-export const RomaineExample = ({ setBlob }: RomaineExampleProps) => {
+export const RomaineExample = ({
+  setBlob,
+  image = "https://source.unsplash.com/random",
+}: RomaineExampleProps) => {
   return (
     <Romaine>
-      <ChildComponent setBlob={setBlob} />
+      <ChildComponent setBlob={setBlob} image={image} />
     </Romaine>
   );
 };
@@ -21,12 +25,10 @@ export const RomaineExample = ({ setBlob }: RomaineExampleProps) => {
  *
  * @todo 1) move the get blob button into its own file
  */
-export const ChildComponent = ({ setBlob }: RomaineExampleProps) => {
+export const ChildComponent = ({ setBlob, image }: RomaineExampleProps) => {
   const RomaineRef = useRef<RomaineRef>(null);
   const { loaded, setMode } = useRomaine();
-  const [state, setstate] = useState<File | string | null>(
-    "https://source.unsplash.com/random"
-  );
+  const [state, setstate] = useState<File | string | null>(image);
 
   return (
     <div style={{ marginTop: "4em" }}>
