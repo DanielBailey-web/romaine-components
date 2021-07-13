@@ -8,7 +8,7 @@ Component library for use with romaine
 
 # Example
 
-```
+```ts
 import { useEffect, useState } from "react";
 import "./App.css";
 //@ts-ignore
