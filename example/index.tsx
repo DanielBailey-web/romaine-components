@@ -34,6 +34,7 @@ export const ChildComponent = ({ setBlob, image }: RomaineExampleProps) => {
     <div style={{ marginTop: "4em" }}>
       {loaded && (
         <Canvas
+          saltId={Math.random().toString()}
           ref={RomaineRef}
           image={state}
           maxHeight={500}
@@ -68,12 +69,13 @@ export const ChildComponent = ({ setBlob, image }: RomaineExampleProps) => {
               setMode && setMode(null);
               // need to let mode actually get set to null
               // React 18 useTransition would be nice here...
-              // but for backwards compatability doing this...
+              // but for backwards compatability currently doing this...
               setTimeout(async () => {
                 if (setBlob && RomaineRef.current?.getBlob) {
                   const newBlob =
                     (await RomaineRef.current?.getBlob({
                       type: "image/jpeg",
+                      quality: 0.86,
                     })) || null;
                   setBlob(newBlob);
                 } else {
