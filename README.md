@@ -6,7 +6,7 @@ Component library for use with romaine
 
 `$ npm i romaine-components`
 
-# example
+# Example
 
 ```
 import { useEffect, useState } from "react";
