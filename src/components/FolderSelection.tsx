@@ -178,7 +178,7 @@ export const FolderSelection = ({
             props.onChange && props.onChange(e);
             setInputValue(e.target.value);
             getFiles && getFiles(e.target.files);
-            dispatch("initial");
+            dispatch("final");
           }}
         />
         {children}
