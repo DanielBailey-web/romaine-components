@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Canvas, Romaine, RomaineRef, useRomaine } from "romaine";
+import { Canvas, RomaineRef, useRomaine } from "romaine";
 import {
   CropperIcon,
   FolderSelection,
@@ -11,21 +11,14 @@ interface RomaineExampleProps {
   setBlob?: (blob: Blob | null) => void;
   image: string | null;
 }
-export const RomaineExample = ({
-  setBlob,
-  image = "https://source.unsplash.com/random",
-}: RomaineExampleProps) => {
-  return (
-    <Romaine>
-      <ChildComponent setBlob={setBlob} image={image} />
-    </Romaine>
-  );
-};
 /**
  *
  * @todo 1) move the get blob button into its own file
  */
-export const ChildComponent = ({ setBlob, image }: RomaineExampleProps) => {
+export const RomaineExample = ({
+  setBlob,
+  image = "https://source.unsplash.com/random",
+}: RomaineExampleProps) => {
   const RomaineRef = useRef<RomaineRef>(null);
   const { loaded, setMode } = useRomaine();
   const [state, setstate] = useState<File | string | null>(image);
