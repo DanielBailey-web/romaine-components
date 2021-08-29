@@ -1,6 +1,6 @@
 # romaine-components
 
-Component library for use with romaine
+Component library for use with <a href="https://www.npmjs.com/package/romaine">romaine</a>
 
 # Installation
 
@@ -19,6 +19,8 @@ function App() {
 
   useEffect(() => {
     if (blob !== null) {
+      // create an url image with an anchor tag that can be clicked to download it
+      // finally use javascript to click the link so the download begins
       const url = window.URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.href = url;
@@ -30,7 +32,12 @@ function App() {
 
   return (
     <div className="App">
-      <RomaineExample setBlob={setBlob} />
+      <Romaine>
+        <RomaineExample
+          setBlob={setBlob}
+          image="https://source.unsplash.com/random"
+        />
+      </Romaine>
     </div>
   );
 }
