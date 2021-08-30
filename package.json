@@ -1,6 +1,6 @@
 {
   "name": "romaine-components",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Component library for use with romaine",
   "main": "dist/romaine_components.development.esm.jsx",
   "types": "dist/romaine_components.development",
