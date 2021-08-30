@@ -21,7 +21,7 @@ export const IconWrapper = ({
   } = useRomaine();
   const [hover, sethover] = useState<boolean>(false);
   return (
-    <abbr title={tooltip}>
+    <abbr style={{ cursor: "pointer" }} title={tooltip}>
       <div
         onMouseEnter={() => sethover(true)}
         onMouseLeave={() => sethover(false)}

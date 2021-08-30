@@ -52,11 +52,13 @@ export const RomaineExample = ({
               right: 0,
               bottom: "3ch",
               zIndex: 400,
-              border: "thin solid black",
+              outline: "thin solid black",
               borderRadius: 0,
               fontSize: "16px",
               background: "white",
               width: "240px",
+              border: "none",
+              cursor: "pointer",
             }}
             onClick={async () => {
               setMode && setMode(null);

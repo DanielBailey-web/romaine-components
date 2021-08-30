@@ -78,6 +78,7 @@ export const FolderSelection = ({
     width: "100%",
     height: "100%",
     outline: "thin solid black",
+    cursor: "pointer",
   };
   const finalDivStyles: React.CSSProperties = {
     display: "flex",
