@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { IconWrapper } from "./IconWrapper";
 import { useRomaine } from "romaine";
 
@@ -13,7 +13,24 @@ interface Props
  */
 export const FullReset = (props: Props) => {
   const { setMode } = useRomaine();
-
+  useEffect(() => {
+    // using keydown because it already requires another key to be pressed
+    const eventListenerCropper = (e: KeyboardEvent) => {
+      if (e.ctrlKey && e.shiftKey && e.key === "Z") {
+        e.preventDefault();
+        window.confirm(
+          "Are you sure you want to reset this image? All current cropping progress will be lost."
+        ) &&
+          setMode &&
+          setMode("full-reset");
+      }
+    };
+    window.removeEventListener("keydown", eventListenerCropper);
+    window.addEventListener("keydown", eventListenerCropper);
+    return () => {
+      window.removeEventListener("keydown", eventListenerCropper);
+    };
+  }, []);
   return (
     <IconWrapper
       {...props}
@@ -25,6 +42,7 @@ export const FullReset = (props: Props) => {
         setMode("full-reset")
       }
       selected="full-reset"
+      tooltip={"Reinitialize Image (Ctrl + Shift + Z)"}
     >
       <svg
         stroke="currentColor"
