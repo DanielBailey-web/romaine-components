@@ -3,6 +3,7 @@ import { Canvas, RomaineRef, useRomaine } from "romaine";
 import {
   CropperIcon,
   FolderSelection,
+  FullReset,
   PerspectiveIcon,
   RotateLeft,
   RotateRight,
@@ -102,6 +103,7 @@ export const RomaineExample = ({
               <RotateRight />
               <CropperIcon />
               <PerspectiveIcon />
+              <FullReset />
             </div>
           </div>
         </Canvas>
