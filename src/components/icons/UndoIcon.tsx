@@ -48,7 +48,7 @@ export const UndoIcon = (props: Props) => {
       <svg
         stroke="currentColor"
         fill="currentColor"
-        stroke-width="0"
+        strokeWidth="0"
         viewBox="0 0 1024 1024"
         height="25px"
         width="25px"
