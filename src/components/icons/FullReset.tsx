@@ -15,7 +15,10 @@ export const FullReset = (props: Props) => {
   const {
     setMode,
     romaine: {
-      history: { pointer },
+      history: {
+        pointer,
+        commands: { length },
+      },
     },
   } = useRomaine();
   // using keydown because it already requires another key to be pressed
@@ -52,7 +55,7 @@ export const FullReset = (props: Props) => {
       }
       selected="full-reset"
       tooltip={"Reinitialize Image (Ctrl + Shift + Z)"}
-      disabled={!pointer}
+      disabled={!length}
     >
       <svg
         stroke="currentColor"
