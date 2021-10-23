@@ -76,11 +76,6 @@ export const RomaineExample = ({
                     })) || null;
                   setBlob(newBlob);
                 } else {
-                  if (RomaineRef.current?.getBlob)
-                    console.log(
-                      "Image as Blob: ",
-                      await RomaineRef.current?.getBlob({ type: "image/jpeg" })
-                    );
                   console.warn("You must give the example setBlob as an input");
                 }
               }, 0);
