@@ -7,6 +7,7 @@ import {
   PerspectiveIcon,
   RotateLeft,
   RotateRight,
+  UndoIcon,
 } from "../src/components";
 interface RomaineExampleProps {
   setBlob?: (blob: Blob | null) => void;
@@ -104,6 +105,8 @@ export const RomaineExample = ({
               <CropperIcon />
               <PerspectiveIcon />
               <FullReset />
+              <div></div>
+              <UndoIcon />
             </div>
           </div>
         </Canvas>

@@ -4,8 +4,8 @@ import { useRomaine } from "romaine";
 
 interface Props
   extends React.DetailedHTMLProps<
-    React.HTMLAttributes<HTMLDivElement>,
-    HTMLDivElement
+    React.HTMLAttributes<HTMLButtonElement>,
+    HTMLButtonElement
   > {}
 
 export const PerspectiveIcon = (props: Props) => {

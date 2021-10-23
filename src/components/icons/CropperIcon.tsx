@@ -3,8 +3,8 @@ import { IconWrapper } from "./IconWrapper";
 import { useRomaine } from "romaine";
 interface Props
   extends React.DetailedHTMLProps<
-    React.HTMLAttributes<HTMLDivElement>,
-    HTMLDivElement
+    React.HTMLAttributes<HTMLButtonElement>,
+    HTMLButtonElement
   > {}
 
 export const CropperIcon = (props: Props) => {
@@ -28,7 +28,7 @@ export const CropperIcon = (props: Props) => {
       {...props}
       onClick={() => setMode && setMode("crop")}
       selected="crop"
-      tooltip="Crop Tool (shift+C)"
+      tooltip="Crop Tool (Shift + C)"
     >
       <svg
         stroke="currentColor"

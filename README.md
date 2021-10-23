@@ -9,18 +9,19 @@ Component library for use with <a href="https://www.npmjs.com/package/romaine">r
 # Example
 
 ```ts
-import { useEffect, useState } from "react";
-import "./App.css";
+import { useEffect, useState, useMemo } from "react";
 //@ts-ignore
 import { RomaineExample } from "romaine-components";
+import { Romaine } from "romaine";
 
 function App() {
   const [blob, setBlob] = useState<Blob | null>(null);
-
+  const image = useMemo(
+    () => `https://source.unsplash.com/random?unique=${Math.random()}`,
+    []
+  );
   useEffect(() => {
     if (blob !== null) {
-      // create an url image with an anchor tag that can be clicked to download it
-      // finally use javascript to click the link so the download begins
       const url = window.URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.href = url;
@@ -32,11 +33,8 @@ function App() {
 
   return (
     <div className="App">
-      <Romaine>
-        <RomaineExample
-          setBlob={setBlob}
-          image="https://source.unsplash.com/random"
-        />
+      <Romaine angle={90}>
+        <RomaineExample setBlob={setBlob} image={image} />
       </Romaine>
     </div>
   );
