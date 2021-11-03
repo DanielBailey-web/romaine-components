@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import { Canvas, RomaineRef, useRomaine } from "romaine";
+import type { ImageExportOptions } from "romaine";
 import {
   CropperIcon,
   FolderSelection,
@@ -8,18 +9,19 @@ import {
   RotateLeft,
   RotateRight,
   UndoIcon,
-} from "../src/components";
+} from "../../";
 interface RomaineExampleProps {
   setBlob?: (blob: Blob | null) => void;
   image: string | null;
+  imageExportOptions?: Partial<ImageExportOptions>;
 }
 /**
- *
  * @todo 1) move the get blob button into its own file
  */
 export const RomaineExample = ({
   setBlob,
   image = "https://source.unsplash.com/random",
+  imageExportOptions,
 }: RomaineExampleProps) => {
   const RomaineRef = useRef<RomaineRef>(null);
   const { loaded, setMode } = useRomaine();
@@ -42,7 +44,9 @@ export const RomaineExample = ({
         >
           <FolderSelection
             image={state}
-            getFiles={(files) => setstate(files && files[0])}
+            getFiles={(files: string | FileList) =>
+              setstate(typeof files === "string" ? files : files[0])
+            }
           >
             <span style={{ display: "grid", placeItems: "center" }}>
               {state ? "Choose a Different File" : "Choose or Drag a File Here"}
@@ -71,8 +75,7 @@ export const RomaineExample = ({
                 if (setBlob && RomaineRef.current?.getBlob) {
                   const newBlob =
                     (await RomaineRef.current?.getBlob({
-                      type: "image/jpeg",
-                      quality: 0.86,
+                      ...imageExportOptions,
                     })) || null;
                   setBlob(newBlob);
                 } else {
