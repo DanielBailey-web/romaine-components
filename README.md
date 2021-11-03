@@ -10,8 +10,7 @@ Component library for use with <a href="https://www.npmjs.com/package/romaine">r
 
 ```ts
 import { useEffect, useState, useMemo } from "react";
-//@ts-ignore
-import { RomaineExample } from "romaine-components";
+import { RomaineExample } from "romaine-components/example";
 import { Romaine } from "romaine";
 
 function App() {
@@ -34,7 +33,11 @@ function App() {
   return (
     <div className="App">
       <Romaine angle={90}>
-        <RomaineExample setBlob={setBlob} image={image} />
+        <RomaineExample
+          imageExportOptions={{ type: "image/jpeg", quality: 0.92 }}
+          setBlob={setBlob}
+          image={image}
+        />
       </Romaine>
     </div>
   );
