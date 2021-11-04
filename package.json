@@ -21,7 +21,15 @@
     "url": "git+https://github.com/DanielBailey-web/romaine-components.git"
   },
   "keywords": [
-    "romaine romaine-components crop cropper opencv perspective-cropper image rotate react"
+    "romaine",
+    "romaine-components",
+    "crop",
+    "cropper",
+    "opencv",
+    "perspective-cropper",
+    "image",
+    "rotate",
+    "react"
   ],
   "author": "Daniel Bailey",
   "license": "MIT",
@@ -44,6 +52,6 @@
   },
   "peerDependencies": {
     "react": ">=16.8.3",
-    "romaine": ">= 0.5.5"
+    "romaine": ">= 0.6.0"
   }
 }
